@@ -2,7 +2,8 @@ package com.litter.litter.model;
 
 import javax.persistence.*;
 
-@Entity(name = "role")
+@Entity
+@Table(name = "role")
 public class Role {
 
     @Id
@@ -10,7 +11,8 @@ public class Role {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private ERole rolename;
+    @Column(length = 20)
+    private ERole name;
 
    public Role() {}
 
@@ -22,11 +24,11 @@ public class Role {
         this.id = id;
     }
 
-    public ERole getRolename() {
-        return rolename;
+    public ERole getName() {
+        return name;
     }
 
-    public void setRolename(ERole rolename) {
-        this.rolename = rolename;
+    public void setName(ERole rolename) {
+        this.name = rolename;
     }
 }

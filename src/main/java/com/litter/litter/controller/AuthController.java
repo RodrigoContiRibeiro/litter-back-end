@@ -49,12 +49,10 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-        System.out.println("Autenticação" + authentication);
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getDetails();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(role -> role.getAuthority())
@@ -65,10 +63,13 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
+        if(userService.existsByEmail(registerRequest.getEmail()) & userService.existsByUsername(registerRequest.getUsername())){
+            return ResponseEntity.badRequest().body(new MessageResponse("ERRO: Usuário e Email já existem"));
+        }
+
         if (userService.existsByUsername(registerRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("ERRO: Nome de usuário já existe"));
         }
-        ;
 
         if (userService.existsByEmail(registerRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("ERRO: Email já existe"));
@@ -80,21 +81,21 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleService.findByRolename(ERole.USER);
+            Role userRole = roleService.findByName(ERole.USER);
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
-                        Role adminRole = roleService.findByRolename(ERole.ADMIN);
+                        Role adminRole = roleService.findByName(ERole.ADMIN);
                         roles.add(adminRole);
                         break;
                     case "mod":
-                        Role modRole = roleService.findByRolename(ERole.MODERATOR);
+                        Role modRole = roleService.findByName(ERole.MODERATOR);
                         roles.add(modRole);
                         break;
                     default:
-                        Role userRole = roleService.findByRolename(ERole.USER);
+                        Role userRole = roleService.findByName(ERole.USER);
                         roles.add(userRole);
                 }
             });

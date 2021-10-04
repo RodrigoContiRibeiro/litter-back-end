@@ -41,10 +41,10 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             logger.error("Erro ao autenticar com o usuário {}", e);
+            filterChain.doFilter(request, response);
         }
 
         filterChain.doFilter(request, response);
-
     }
 
     private String parseJwt(HttpServletRequest request) {
