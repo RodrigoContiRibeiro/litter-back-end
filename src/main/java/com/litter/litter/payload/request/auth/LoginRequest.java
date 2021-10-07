@@ -1,4 +1,4 @@
-package com.litter.litter.payload.request;
+package com.litter.litter.payload.request.auth;
 
 import javax.validation.constraints.NotBlank;
 

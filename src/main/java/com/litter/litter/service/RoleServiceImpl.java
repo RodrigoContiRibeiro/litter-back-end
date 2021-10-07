@@ -12,7 +12,17 @@ public class RoleServiceImpl implements RoleService{
     RoleRepository roleRepository;
 
     @Override
+    public Role save(Role role) {
+        return roleRepository.save(role);
+    }
+
+    @Override
     public Role findByName(ERole name) {
         return roleRepository.findByName(name);
+    }
+
+    @Override
+    public boolean existsByName(ERole name) {
+        return roleRepository.existsByName(name);
     }
 }

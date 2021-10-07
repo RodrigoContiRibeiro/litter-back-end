@@ -1,25 +1,29 @@
-package com.litter.litter.payload.request;
+package com.litter.litter.payload.request.user;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import com.litter.litter.model.Role;
+
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-public class RegisterRequest {
-    @NotBlank
-    @Size(min = 3, max = 250)
+public class UpdateUserRequest {
+    @NotNull
+    private Long id;
+
     private String username;
 
-    @NotBlank
-    @Size(max = 250)
-    @Email
     private String email;
 
-    @NotBlank
-    @Size(min = 6, max = 40)
     private String password;
 
-    private Set<String> role;
+    private Set<String> roles;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -45,11 +49,11 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public Set<String> getRole() {
-        return role;
+    public Set<String> getRoles() {
+        return roles;
     }
 
-    public void setRole(Set<String> role) {
-        this.role = role;
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 }

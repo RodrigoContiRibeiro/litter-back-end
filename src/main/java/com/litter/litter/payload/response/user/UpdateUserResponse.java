@@ -1,28 +1,46 @@
-package com.litter.litter.payload.response;
+package com.litter.litter.payload.response.user;
 
-import java.util.List;
+import com.litter.litter.model.Role;
 
-public class JwtResponse {
-    private String token;
-    private String type = "Bearer";
+import javax.validation.constraints.NotNull;
+import java.util.Set;
+
+public class UpdateUserResponse {
+    @NotNull
     private Long id;
-    private String username;
-    private String email;
-    private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
-        this.token = accessToken;
+    private String token;
+
+    private String type = "Bearer";
+
+    private String username;
+
+    private String email;
+
+    private Set<Role> roles;
+
+    public UpdateUserResponse(Long id, String token, String type, String username, String email, Set<Role> roles) {
         this.id = id;
+        this.token = token;
+        this.type = type;
         this.username = username;
         this.email = email;
         this.roles = roles;
     }
 
-    public String getAccessToken() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getToken() {
         return token;
     }
 
-    public void setAccessToken(String AccessToken) {
+    public void setToken(String token) {
         this.token = token;
     }
 
@@ -32,14 +50,6 @@ public class JwtResponse {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -58,11 +68,11 @@ public class JwtResponse {
         this.email = email;
     }
 
-    public List<String> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }
