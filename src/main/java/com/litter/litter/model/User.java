@@ -1,7 +1,5 @@
 package com.litter.litter.model;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -9,8 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user",
-        uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +32,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(){};
+    public User() {
+    }
 
     public User(String username, String email, String password) {
         this.username = username;
@@ -48,7 +46,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.roles = roles;
-    };
+    }
 
     public User(String username, String email, String password, Set<Role> roles) {
         this.username = username;

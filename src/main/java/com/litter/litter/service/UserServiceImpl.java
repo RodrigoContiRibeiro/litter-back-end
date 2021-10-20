@@ -4,7 +4,6 @@ import com.litter.litter.model.ERole;
 import com.litter.litter.model.Role;
 import com.litter.litter.model.User;
 import com.litter.litter.payload.request.auth.RegisterRequest;
-import com.litter.litter.payload.request.user.UpdateUserRequest;
 import com.litter.litter.payload.response.MessageResponse;
 import com.litter.litter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElse(new User());
     }
 
     @Override
@@ -67,38 +66,10 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ResponseEntity validateFields(UpdateUserRequest updateUserRequest) {
-        User prevUser = findById(updateUserRequest.getId());
-
-        if(
-        (prevUser.getUsername() != updateUserRequest.getUsername() && prevUser.getEmail() != prevUser.getEmail())
-        &
-        (existsByEmail(updateUserRequest.getEmail()) & existsByUsername(updateUserRequest.getUsername()))){
-            return ResponseEntity.badRequest().body(new MessageResponse("ERRO: Usuário e Email já existem"));
-        }
-        if (prevUser.getUsername() == updateUserRequest.getUsername() && existsByUsername(updateUserRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("ERRO: Nome de usuário já existe"));
-        }
-        if (prevUser.getEmail() == updateUserRequest.getEmail() && existsByEmail(updateUserRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("ERRO: Email já existe"));
-        }
-
-        return null;
-    }
-
-    @Override
     public User buildUserForSave(RegisterRequest registerRequest) {
         User user = new User(registerRequest.getUsername(), registerRequest.getEmail(), encoder.encode(registerRequest.getPassword()));
 
         user.setRoles(buildRoles(registerRequest.getRoles()));
-
-        return user;
-    }
-    @Override
-    public User buildUserForSave(UpdateUserRequest updateUserRequest) {
-        User user = new User(updateUserRequest.getId(),updateUserRequest.getUsername(), updateUserRequest.getEmail(), encoder.encode(updateUserRequest.getPassword()));
-
-        user.setRoles(buildRoles(updateUserRequest.getRoles()));
 
         return user;
     }
