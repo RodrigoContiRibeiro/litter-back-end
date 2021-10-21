@@ -1,7 +1,5 @@
 package com.litter.litter.payload.request.book;
 
-import com.litter.litter.model.Votation;
-
 import javax.validation.constraints.NotBlank;
 
 public class SaveBookRequest {

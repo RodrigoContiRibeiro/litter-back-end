@@ -5,6 +5,8 @@ import com.litter.litter.repository.book.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BookServiceImpl implements BookService {
     @Autowired
@@ -14,5 +16,10 @@ public class BookServiceImpl implements BookService {
     public boolean save(Book book) {
         bookRepository.save(book);
         return true;
+    }
+
+    @Override
+    public Book findById(Long id) {
+        return bookRepository.findById(id).get();
     }
 }

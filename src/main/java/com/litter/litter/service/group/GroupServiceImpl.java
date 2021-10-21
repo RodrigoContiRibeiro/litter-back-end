@@ -23,4 +23,9 @@ public class GroupServiceImpl implements GroupService {
     public List<Group> list() {
         return groupRepository.findAll();
     }
+
+    @Override
+    public boolean existsByName(String name) {
+        return groupRepository.existsByName(name);
+    }
 }

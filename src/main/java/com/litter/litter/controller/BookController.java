@@ -1,7 +1,6 @@
 package com.litter.litter.controller;
 
 import com.litter.litter.model.Book;
-import com.litter.litter.model.Votation;
 import com.litter.litter.payload.request.book.SaveBookRequest;
 import com.litter.litter.payload.response.MessageResponse;
 import com.litter.litter.service.book.BookServiceImpl;

@@ -8,4 +8,5 @@ import java.util.List;
 public interface GroupService {
     public boolean save(Group group);
     public List<Group> list();
+    public boolean existsByName(String name);
 }

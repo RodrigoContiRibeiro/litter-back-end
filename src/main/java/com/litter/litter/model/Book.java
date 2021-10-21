@@ -17,12 +17,6 @@ public class Book {
     @Lob
     private String imageUrl;
 
-    private int votes;
-
-    @ManyToOne
-    @JoinColumn(name = "votation_id")
-    private Votation votation;
-
     public Book() {
     }
 
@@ -71,21 +65,5 @@ public class Book {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
-
-    public Votation getVotation() {
-        return votation;
-    }
-
-    public void setVotation(Votation votation) {
-        this.votation = votation;
     }
 }
