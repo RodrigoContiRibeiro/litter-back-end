@@ -13,6 +13,8 @@ public class Group {
     private User creator;
 
     private String name;
+
+    @Lob
     private String description;
 
     @OneToOne

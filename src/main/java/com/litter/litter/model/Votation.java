@@ -29,6 +29,16 @@ public class Votation {
         });
     }
 
+    public Votation() {
+    }
+
+    public Votation(Long id, List<Book> booksToVote, boolean isFinished, Book decidedBook) {
+        this.id = id;
+        this.booksToVote = booksToVote;
+        this.isFinished = isFinished;
+        this.decidedBook = decidedBook;
+    }
+
     public Long getId() {
         return id;
     }

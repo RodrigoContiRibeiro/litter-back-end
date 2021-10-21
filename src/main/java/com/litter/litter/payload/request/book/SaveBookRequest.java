@@ -1,45 +1,23 @@
-package com.litter.litter.model;
+package com.litter.litter.payload.request.book;
 
-import javax.persistence.*;
+import com.litter.litter.model.Votation;
 
-@Entity
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+import javax.validation.constraints.NotBlank;
 
+public class SaveBookRequest {
+    @NotBlank
     private String title;
+
+    @NotBlank
     private String author;
 
-    @Lob
+    @NotBlank
     private String synopsis;
 
-    @Lob
+    @NotBlank
     private String imageUrl;
 
     private int votes;
-
-    @ManyToOne
-    @JoinColumn(name = "votation_id")
-    private Votation votation;
-
-    public Book() {
-    }
-
-    public Book(String title, String author, String synopsis, String imageUrl) {
-        this.title = title;
-        this.author = author;
-        this.synopsis = synopsis;
-        this.imageUrl = imageUrl;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -79,13 +57,5 @@ public class Book {
 
     public void setVotes(int votes) {
         this.votes = votes;
-    }
-
-    public Votation getVotation() {
-        return votation;
-    }
-
-    public void setVotation(Votation votation) {
-        this.votation = votation;
     }
 }
