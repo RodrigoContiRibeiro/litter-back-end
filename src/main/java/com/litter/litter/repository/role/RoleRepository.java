@@ -1,4 +1,4 @@
-package com.litter.litter.repository;
+package com.litter.litter.repository.role;
 
 import com.litter.litter.model.ERole;
 import com.litter.litter.model.Role;

@@ -2,7 +2,7 @@ package com.litter.litter;
 
 import com.litter.litter.model.ERole;
 import com.litter.litter.model.Role;
-import com.litter.litter.service.RoleServiceImpl;
+import com.litter.litter.service.role.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

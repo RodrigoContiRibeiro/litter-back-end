@@ -4,7 +4,7 @@ import com.litter.litter.model.User;
 import com.litter.litter.payload.request.user.GetUserRequest;
 import com.litter.litter.payload.response.MessageResponse;
 import com.litter.litter.payload.response.user.GetUserResponse;
-import com.litter.litter.service.UserServiceImpl;
+import com.litter.litter.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;

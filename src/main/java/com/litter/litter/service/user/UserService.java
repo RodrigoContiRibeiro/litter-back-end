@@ -1,4 +1,4 @@
-package com.litter.litter.service;
+package com.litter.litter.service.user;
 
 import com.litter.litter.model.Role;
 import com.litter.litter.model.User;

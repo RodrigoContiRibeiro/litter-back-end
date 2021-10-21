@@ -1,11 +1,12 @@
-package com.litter.litter.service;
+package com.litter.litter.service.user;
 
 import com.litter.litter.model.ERole;
 import com.litter.litter.model.Role;
 import com.litter.litter.model.User;
 import com.litter.litter.payload.request.auth.RegisterRequest;
 import com.litter.litter.payload.response.MessageResponse;
-import com.litter.litter.repository.UserRepository;
+import com.litter.litter.repository.user.UserRepository;
+import com.litter.litter.service.role.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;

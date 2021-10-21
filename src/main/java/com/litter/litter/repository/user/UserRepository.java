@@ -1,4 +1,4 @@
-package com.litter.litter.repository;
+package com.litter.litter.repository.user;
 
 import com.litter.litter.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

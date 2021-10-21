@@ -1,8 +1,8 @@
-package com.litter.litter.service;
+package com.litter.litter.service.role;
 
 import com.litter.litter.model.ERole;
 import com.litter.litter.model.Role;
-import com.litter.litter.repository.RoleRepository;
+import com.litter.litter.repository.role.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

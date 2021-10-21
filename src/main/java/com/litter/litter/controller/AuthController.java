@@ -7,7 +7,7 @@ import com.litter.litter.payload.response.auth.JwtResponse;
 import com.litter.litter.payload.response.MessageResponse;
 import com.litter.litter.security.jwt.JwtUtils;
 import com.litter.litter.security.userDetails.UserDetailsImpl;
-import com.litter.litter.service.UserServiceImpl;
+import com.litter.litter.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

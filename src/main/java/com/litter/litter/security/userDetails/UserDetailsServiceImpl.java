@@ -1,7 +1,7 @@
 package com.litter.litter.security.userDetails;
 
 import com.litter.litter.model.User;
-import com.litter.litter.service.UserServiceImpl;
+import com.litter.litter.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
