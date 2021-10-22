@@ -4,13 +4,16 @@ import com.litter.litter.model.User;
 import com.litter.litter.payload.request.user.GetUserRequest;
 import com.litter.litter.payload.response.MessageResponse;
 import com.litter.litter.payload.response.user.GetUserResponse;
+import com.litter.litter.payload.response.user.ListUserResponse;
 import com.litter.litter.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -33,7 +36,11 @@ public class UserController {
 
         return ResponseEntity.ok().body(new GetUserResponse(user.getId(), user.getUsername(), user.getEmail(), user.getRoles()));
     };
-    // POST to register user data(in the auth controller)
 
-    // DELETE to remove user data
+    @GetMapping("/list")
+    public ResponseEntity<ListUserResponse> list() {
+        List<User> users = userService.findAll();
+
+        return new ResponseEntity<>(new ListUserResponse(users), HttpStatus.OK);
+    };
 }

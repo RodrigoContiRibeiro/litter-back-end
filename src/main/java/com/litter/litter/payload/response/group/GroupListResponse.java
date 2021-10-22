@@ -6,17 +6,17 @@ import com.litter.litter.model.Group;
 import java.util.List;
 
 public class GroupListResponse {
-    private List<Group> books;
+    private List<Group> groups;
 
-    public GroupListResponse(List<Group> books) {
-        this.books = books;
+    public GroupListResponse(List<Group> groups) {
+        this.groups = groups;
     }
 
-    public List<Group> getBooks() {
-        return books;
+    public List<Group> getGroups()   {
+        return groups;
     }
 
-    public void setBooks(List<Group> books) {
-        this.books = books;
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
     }
 }

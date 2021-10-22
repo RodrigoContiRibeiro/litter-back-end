@@ -27,7 +27,7 @@ public class GroupController {
     @Autowired
     BookServiceImpl bookService;
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public GroupListResponse list() {
         return new GroupListResponse(groupService.list());
     }
@@ -46,16 +46,21 @@ public class GroupController {
             }
 
             if (hasBook) {
+                System.out.println("Has Book");
                 Book currentBook = bookService.findById(groupSaveRequest.getCurrentBook());
                 if (isUpdate) {
+                    System.out.println("Update");
                     groupService.save(new Group(groupSaveRequest.getId(), creator, groupSaveRequest.getName(), groupSaveRequest.getDescription(), currentBook));
                 } else {
+                    System.out.println("Save");
                     groupService.save(new Group(creator, groupSaveRequest.getName(), groupSaveRequest.getDescription(), currentBook));
                 }
             } else {
                 if (isUpdate) {
+                    System.out.println("Update");
                     groupService.save(new Group(groupSaveRequest.getId(), creator, groupSaveRequest.getName(), groupSaveRequest.getDescription()));
                 } else {
+                    System.out.println("Save");
                     groupService.save(new Group(creator, groupSaveRequest.getName(), groupSaveRequest.getDescription()));
                 }
             }

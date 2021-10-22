@@ -5,10 +5,13 @@ import com.litter.litter.model.User;
 import com.litter.litter.payload.request.auth.RegisterRequest;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Set;
 
 public interface UserService {
     public User save(User user);
+
+    public List<User> findAll();
 
     public User findById(Long id);
 

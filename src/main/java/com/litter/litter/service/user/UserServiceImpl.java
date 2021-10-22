@@ -13,10 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
@@ -27,9 +28,14 @@ public class UserServiceImpl implements UserService{
     PasswordEncoder encoder;
 
     @Override
-    public User save(User user){
+    public User save(User user) {
         return userRepository.save(user);
-    };
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
     @Override
     public User findById(Long id) {
@@ -53,7 +59,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public ResponseEntity validateFields(RegisterRequest registerRequest) {
-        if(existsByEmail(registerRequest.getEmail()) & existsByUsername(registerRequest.getUsername())){
+        if (existsByEmail(registerRequest.getEmail()) & existsByUsername(registerRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("ERRO: Usuário e Email já existem"));
         }
         if (existsByUsername(registerRequest.getUsername())) {

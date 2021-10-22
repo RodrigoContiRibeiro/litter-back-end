@@ -15,8 +15,6 @@ public class SaveBookRequest {
     @NotBlank
     private String imageUrl;
 
-    private int votes;
-
     public String getTitle() {
         return title;
     }
@@ -47,13 +45,5 @@ public class SaveBookRequest {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
     }
 }
