@@ -35,32 +35,26 @@ public class GroupController {
     @PostMapping("/")
     public ResponseEntity<MessageResponse> save(@RequestBody GroupSaveRequest groupSaveRequest) {
         try {
-            User creator = userService.findById(groupSaveRequest.getCreator());
-            boolean isUpdate = groupSaveRequest.getId() != null;
-            boolean hasBook = groupSaveRequest.getCurrentBook() != null;
-
             boolean alreadyExists = groupService.existsByName(groupSaveRequest.getName());
-
             if (alreadyExists) {
                 return new ResponseEntity<>(new MessageResponse("Nome de Grupo já existe"), HttpStatus.BAD_REQUEST);
             }
 
+            User creator = userService.findById(groupSaveRequest.getCreator());
+            boolean isUpdate = groupSaveRequest.getId() != null;
+
+            boolean hasBook = groupSaveRequest.getCurrentBook() != null;
             if (hasBook) {
-                System.out.println("Has Book");
                 Book currentBook = bookService.findById(groupSaveRequest.getCurrentBook());
                 if (isUpdate) {
-                    System.out.println("Update");
                     groupService.save(new Group(groupSaveRequest.getId(), creator, groupSaveRequest.getName(), groupSaveRequest.getDescription(), currentBook));
                 } else {
-                    System.out.println("Save");
                     groupService.save(new Group(creator, groupSaveRequest.getName(), groupSaveRequest.getDescription(), currentBook));
                 }
             } else {
                 if (isUpdate) {
-                    System.out.println("Update");
                     groupService.save(new Group(groupSaveRequest.getId(), creator, groupSaveRequest.getName(), groupSaveRequest.getDescription()));
                 } else {
-                    System.out.println("Save");
                     groupService.save(new Group(creator, groupSaveRequest.getName(), groupSaveRequest.getDescription()));
                 }
             }
@@ -70,5 +64,4 @@ public class GroupController {
             return new ResponseEntity<>(new MessageResponse("Erro"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

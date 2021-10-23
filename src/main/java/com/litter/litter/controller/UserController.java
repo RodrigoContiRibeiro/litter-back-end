@@ -6,6 +6,7 @@ import com.litter.litter.payload.response.MessageResponse;
 import com.litter.litter.payload.response.user.GetUserResponse;
 import com.litter.litter.payload.response.user.ListUserResponse;
 import com.litter.litter.service.user.UserServiceImpl;
+import com.litter.litter.util.MyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +40,6 @@ public class UserController {
 
     @GetMapping("/list")
     public ResponseEntity<ListUserResponse> list() {
-        List<User> users = userService.findAll();
-
-        return new ResponseEntity<>(new ListUserResponse(users), HttpStatus.OK);
+        return new ResponseEntity<>(new ListUserResponse(new MyUtils().removePasswordFromUserList(userService.findAll())), HttpStatus.OK);
     };
 }
