@@ -51,6 +51,14 @@ public class Group {
         this.currentBook = currentBook;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public User getCreator() {
         return creator;
     }

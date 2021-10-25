@@ -3,8 +3,11 @@ package com.litter.litter.controller;
 import com.litter.litter.model.Book;
 import com.litter.litter.model.Group;
 import com.litter.litter.model.User;
+import com.litter.litter.payload.request.group.DeleteGroupRequest;
+import com.litter.litter.payload.request.group.GetGroupRequest;
 import com.litter.litter.payload.request.group.GroupSaveRequest;
 import com.litter.litter.payload.response.MessageResponse;
+import com.litter.litter.payload.response.group.GetGroupResponse;
 import com.litter.litter.payload.response.group.GroupListResponse;
 import com.litter.litter.service.book.BookServiceImpl;
 import com.litter.litter.service.group.GroupServiceImpl;
@@ -63,5 +66,19 @@ public class GroupController {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(new MessageResponse("Erro"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/")
+    public ResponseEntity getById(@RequestBody GetGroupRequest getGroupRequest) {
+        Group group = groupService.findById(getGroupRequest.getId());
+        if (group != null) {
+            return new ResponseEntity(new GetGroupResponse(group.getId(), group.getCreator(), group.getName(), group.getDescription(), group.getCurrentBook()), HttpStatus.OK);
+        }
+        return new ResponseEntity(new MessageResponse("Não foi encontrado"), HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<MessageResponse> delete(@RequestBody DeleteGroupRequest deleteGroupRequest) {
+        return groupService.validateForDeletion(deleteGroupRequest);
     }
 }
