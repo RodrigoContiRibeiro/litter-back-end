@@ -1,6 +1,5 @@
 package com.litter.litter.security.jwt;
 
-import com.litter.litter.model.User;
 import com.litter.litter.security.userDetails.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
@@ -52,6 +51,10 @@ public class JwtUtils {
 
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public Date getIssuedDate(String token) {
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getIssuedAt();
     }
 
     public String getJwtSecret() {

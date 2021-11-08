@@ -1,17 +1,20 @@
 package com.litter.litter.payload.response.auth;
 
+import java.util.Date;
 import java.util.List;
 
 public class JwtResponse {
     private String token;
+    private Date issuedAt;
     private String type = "Bearer";
     private Long id;
     private String username;
     private String email;
     private List<String> roles;
 
-    public JwtResponse(String token, Long id, String username, String email, List<String> roles) {
+    public JwtResponse(String token, Date issuedAt, Long id, String username, String email, List<String> roles) {
         this.token = token;
+        this.issuedAt = issuedAt;
         this.id = id;
         this.username = username;
         this.email = email;
@@ -24,6 +27,14 @@ public class JwtResponse {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Date getIssuedAt() {
+        return issuedAt;
+    }
+
+    public void setIssuedAt(Date issuedAt) {
+        this.issuedAt = issuedAt;
     }
 
     public String getType() {
