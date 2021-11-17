@@ -17,6 +17,9 @@ public class GetUserResponse {
         this.roles = roles;
     }
 
+    public GetUserResponse() {
+    }
+
     public Long getId() {
         return id;
     }

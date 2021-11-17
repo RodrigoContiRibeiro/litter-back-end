@@ -1,8 +1,10 @@
 package com.litter.litter.controller;
 
 import com.litter.litter.model.User;
+import com.litter.litter.payload.request.user.GetUserByNameRequest;
 import com.litter.litter.payload.request.user.GetUserRequest;
 import com.litter.litter.payload.response.MessageResponse;
+import com.litter.litter.payload.response.user.GetUserByNameResponse;
 import com.litter.litter.payload.response.user.GetUserResponse;
 import com.litter.litter.payload.response.user.ListUserResponse;
 import com.litter.litter.service.user.UserServiceImpl;
@@ -30,6 +32,17 @@ public class UserController {
     @GetMapping("/")
     public ResponseEntity getByID(@Valid @RequestBody GetUserRequest getUserRequest){
         User user = userService.findById(getUserRequest.getId());
+
+        if(user.getId() == null && user.getUsername() == null && user.getEmail() == null){
+            return ResponseEntity.badRequest().body(new MessageResponse("Usuário não encontrado"));
+        }
+
+        return ResponseEntity.ok().body(new GetUserResponse(user.getId(), user.getUsername(), user.getEmail(), user.getRoles()));
+    };
+
+    @GetMapping("/find")
+    public ResponseEntity getByName(@RequestParam String username) {
+        User user = userService.findByUsername(username);
 
         if(user.getId() == null && user.getUsername() == null && user.getEmail() == null){
             return ResponseEntity.badRequest().body(new MessageResponse("Usuário não encontrado"));
