@@ -3,7 +3,7 @@ package com.litter.litter.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "role")
+@Table(name = "my_role")
 public class Role {
 
     @Id
